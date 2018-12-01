@@ -8,7 +8,7 @@ namespace AdventOfCode2018
 
         static void Main(string[] args)
         {
-            int answer = ChronalCalibration.CalibrateChronal(false);
+            int answer = ChronalCalibration.CalibrateChronal(true);
         }
     }
 }

@@ -33,13 +33,13 @@ namespace AdventOfCode2018.Challenge
                         }
                     }
                 }
-
-                return answer;
             }
             catch (Exception e)
             {
                 throw e;
             }
+
+            return answer;
         }
 
         private static int ParseFrequencyChange(string supposedFrequencyChange)
