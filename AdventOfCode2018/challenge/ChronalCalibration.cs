@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace AdventOfCode2018.Challenge
+namespace AdventOfCode2018.challenge
 {
     class ChronalCalibration : Challenge
     {

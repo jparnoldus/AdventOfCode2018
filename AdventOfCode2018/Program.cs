@@ -1,4 +1,4 @@
-﻿using AdventOfCode2018.Challenge;
+﻿using AdventOfCode2018.challenge;
 
 namespace AdventOfCode2018
 {
@@ -8,7 +8,7 @@ namespace AdventOfCode2018
 
         static void Main(string[] args)
         {
-            int answer = ChronalCalibration.CalibrateChronal(true);
+            var answer = InventoryManagementSystem.GetPrototype();
         }
     }
 }
