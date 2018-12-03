@@ -8,7 +8,7 @@ namespace AdventOfCode2018
 
         static void Main(string[] args)
         {
-            var answer = InventoryManagementSystem.GetPrototype();
+            var answer = NoMatterHowYouSliceIt.GetNotOverlapped();
         }
     }
 }
