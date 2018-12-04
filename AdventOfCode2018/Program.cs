@@ -8,7 +8,7 @@ namespace AdventOfCode2018
 
         static void Main(string[] args)
         {
-            var answer = NoMatterHowYouSliceIt.GetNotOverlapped();
+            var answer = ReposeRecord.DoStrategy1();
         }
     }
 }

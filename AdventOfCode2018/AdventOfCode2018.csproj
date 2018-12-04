@@ -46,6 +46,7 @@
     <Compile Include="challenge\ChronalCalibration.cs" />
     <Compile Include="challenge\InventoryManagementSystem.cs" />
     <Compile Include="challenge\NoMatterHowYouSliceIt.cs" />
+    <Compile Include="challenge\ReposeRecord.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -60,6 +61,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="input\day3.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="input\day4.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
