@@ -8,7 +8,7 @@ namespace AdventOfCode2018
 
         static void Main(string[] args)
         {
-            var answer = ReposeRecord.DoStrategy1();
+            var answer = ReposeRecord.DoStrategy2();
         }
     }
 }

@@ -26,8 +26,33 @@ namespace AdventOfCode2018.challenge
             var sleepyGuard = guardAsleepSum.OrderByDescending(g => g.Value).First().Key;
             var sleepyGuardAsleeps = shifts.Where(s => s.guard == sleepyGuard).SelectMany(s => s.asleep);
 
+            var minute = GetSleepiestMinute(sleepyGuardAsleeps).Key;
+
+            return minute * sleepyGuard;
+        }
+
+        public static int DoStrategy2()
+        {
+            var list = GetList();
+            list.Sort(SortGuardTimes);
+            var shifts = Objectify(list);
+
+            Dictionary<int, KeyValuePair<int, int>> sleepiestMinutesByGuards = new Dictionary<int, KeyValuePair<int, int>>();
+            foreach (var guard in shifts.Select(s => s.guard).Distinct())
+            {
+                var temp = shifts.Where(s => s.guard == guard).SelectMany(s => s.asleep);
+                if (temp.Count() != 0) sleepiestMinutesByGuards.Add(guard, GetSleepiestMinute(temp)); // Magic if statement
+            }
+
+            var sleepiestGuardOfSpecificMinute = sleepiestMinutesByGuards.OrderByDescending(c => c.Value.Value).First();
+
+            return sleepiestGuardOfSpecificMinute.Key * sleepiestGuardOfSpecificMinute.Value.Key;
+        }
+
+        public static KeyValuePair<int, int> GetSleepiestMinute(IEnumerable<Asleep> asleeps)
+        {
             var asleepMinutes = new Dictionary<int, int>();
-            foreach (var asleep in sleepyGuardAsleeps)
+            foreach (var asleep in asleeps)
             {
                 for (int i = asleep.start.Minute; i < asleep.end.Minute; i++)
                 {
@@ -38,9 +63,7 @@ namespace AdventOfCode2018.challenge
                 }
             }
 
-            var minute = asleepMinutes.OrderByDescending(m => m.Value).First().Key;
-
-            return minute * sleepyGuard;
+            return asleepMinutes.OrderByDescending(m => m.Value).First();
         }
 
         public static List<Shift> Objectify(List<string> list)
