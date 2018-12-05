@@ -44,7 +44,7 @@
   <ItemGroup>
     <Compile Include="challenge\Challenge.cs" />
     <Compile Include="challenge\ChronalCalibration.cs" />
-    <Compile Include="challenge\Alchemical Reduction.cs" />
+    <Compile Include="challenge\AlchemicalReduction.cs" />
     <Compile Include="challenge\InventoryManagementSystem.cs" />
     <Compile Include="challenge\NoMatterHowYouSliceIt.cs" />
     <Compile Include="challenge\ReposeRecord.cs" />
