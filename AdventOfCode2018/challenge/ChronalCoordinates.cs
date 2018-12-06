@@ -13,10 +13,22 @@ namespace AdventOfCode2018.challenge
         {
             List<Point> list = GetList();
             Map map = new Map();
+
             map.AddCoordinates(list);
             map.FillMap();
 
-            return 0;
+            return map.GetLargestAreaSize();
+        }
+
+        public static int GetLessThanArea()
+        {
+            List<Point> list = GetList();
+            Map map = new Map();
+
+            map.AddCoordinates(list);
+            map.FillMap();
+
+            return map.GetRegionWithLessThan10000Distance();
         }
 
         private static List<Point> GetList()
@@ -58,97 +70,80 @@ namespace AdventOfCode2018.challenge
         }
     }
 
-    public class Margins
-    {
-        public int top;
-        public int left;
-        public int right;
-        public int bottom;
-
-        public static Margins Parse(List<Point> points)
-        {
-            return new Margins()
-            {
-                top = points.Min(p => p.y),
-                left = points.Min(p => p.x),
-                right = points.Max(p => p.x),
-                bottom = points.Max(p => p.y)
-            };
-        }
-    }
-
     public class Map
     {
-        private List<Point> activePoints;
+        private List<Point> points;
         private Point[,] map;
-        private Margins margins;
+        private int[,] sumMap;
 
         public void AddCoordinates(List<Point> points)
         {
-            margins = Margins.Parse(points);
-            map = new Point[margins.bottom - margins.top, margins.right - margins.left];
+            map = new Point[points.Max(p => p.x) + 1, points.Max(p => p.y) + 1];
+            sumMap = new int[points.Max(p => p.x) + 1, points.Max(p => p.y) + 1];
 
+            this.points = points;
             foreach (Point point in points)
             {
-                map[point.x - margins.left, point.y - margins.top] = point;
+                map[point.x, point.y] = point;
             }
-
-            activePoints = points;
         }
 
         public void FillMap()
         {
-            while (activePoints.Count != 0)
+            for (int i = 0; i < map.GetLength(0); i++)
             {
-                FillMap2();
-            }
-        }
-
-        private void FillMap2()
-        {
-            List<Point> freshlyAddedCoordinates = new List<Point>();
-
-            foreach (Point point in activePoints)
-            {
-                List<bool> results = new List<bool>();
-                results.Add(FillCoordinate(point.x + 1, point.y, freshlyAddedCoordinates, map[point.x, point.y]));
-                results.Add(FillCoordinate(point.x - 1, point.y, freshlyAddedCoordinates, map[point.x, point.y]));
-                results.Add(FillCoordinate(point.x, point.y + 1, freshlyAddedCoordinates, map[point.x, point.y]));
-                results.Add(FillCoordinate(point.x, point.y - 1, freshlyAddedCoordinates, map[point.x, point.y]));
-
-                if (results.Contains(false))
+                for (int j = 0; j < map.GetLength(1); j++)
                 {
-                    activePoints.Remove(point);
+                    Dictionary<Point, double> distances = new Dictionary<Point, double>();
+                    foreach (Point point in this.points)
+                    {
+                        distances.Add(point, Math.Abs(i - point.x) + Math.Abs(j - point.y));
+                    }
+
+                    map[i, j] = distances.OrderByDescending(d => d.Value).Last().Key;
+                    sumMap[i, j] = distances.Sum(d => (int)(d.Value));
                 }
             }
         }
 
-        private bool FillCoordinate(int x, int y, List<Point> freshlyAddedCoordinates, Point point)
+        public int GetLargestAreaSize()
         {
-            if (map[x, y] == null)
+            List<Point> excludes = new List<Point>();
+            Dictionary<Point, int> regions = new Dictionary<Point, int>();
+            for (int i = 0; i < map.GetLength(0); i++)
             {
-                map[x, y] = point;
-                Point newPoint = new Point()
+                for (int j = 0; j < map.GetLength(1); j++)
                 {
-                    x = x,
-                    y = y
-                };
+                    if (i <= points.Min(p => p.x) - 1 || i >= points.Max(p => p.x) - 1) excludes.Add(map[i, j]);
+                    if (j <= points.Min(p => p.y) - 1 || j >= points.Max(p => p.y) - 1) excludes.Add(map[i, j]);
 
-                freshlyAddedCoordinates.Add(newPoint);
-                activePoints.Add(point);
-
-                return true;
-            }
-            else if (freshlyAddedCoordinates.Find(p => p.x == x && p.y == y) != null)
-            {
-                map[x, y] = new Point()
-                {
-                    x = -1,
-                    y = -1
-                };
+                    if (regions.ContainsKey(map[i, j]))
+                    {
+                        regions[map[i, j]]++;
+                    }
+                    else regions.Add(map[i, j], 1);
+                }
             }
 
-            return false;
+            excludes = excludes.Distinct().ToList();
+            return regions.Where(r => !excludes.Contains(r.Key)).Max(r => r.Value);
+        }
+
+        public int GetRegionWithLessThan10000Distance()
+        {
+            int amount = 0;
+            for (int i = 0; i < map.GetLength(0); i++)
+            {
+                for (int j = 0; j < map.GetLength(1); j++)
+                {
+                    if (sumMap[i, j] < 10000)
+                    {
+                        amount++;
+                    }
+                }
+            }
+
+            return amount;
         }
     }
 }
