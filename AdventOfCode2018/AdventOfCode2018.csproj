@@ -49,6 +49,7 @@
     <Compile Include="challenge\InventoryManagementSystem.cs" />
     <Compile Include="challenge\NoMatterHowYouSliceIt.cs" />
     <Compile Include="challenge\ReposeRecord.cs" />
+    <Compile Include="challenge\TheSumOfItsParts.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -74,6 +75,7 @@
     <Content Include="input\day6.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="input\day7.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
