@@ -8,7 +8,7 @@ namespace AdventOfCode2018
 
         static void Main(string[] args)
         {
-            var answer = TheSumOfItsParts.GetWorkTime();
+            var answer = MemoryManeuver.GetRootNodeValue();
         }
     }
 }

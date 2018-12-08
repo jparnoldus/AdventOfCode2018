@@ -136,20 +136,20 @@ namespace AdventOfCode2018.challenge
 
             return list;
         }
-    }
 
-    public class Shift
-    {
-        public int guard;
-        public DateTime start;
-        public List<Asleep> asleep = new List<Asleep>();
-        public int sumAsleep;
-    }
+        public class Shift
+        {
+            public int guard;
+            public DateTime start;
+            public List<Asleep> asleep = new List<Asleep>();
+            public int sumAsleep;
+        }
 
-    public class Asleep
-    {
-        public DateTime start;
-        public DateTime end;
-        public int minutes;
+        public class Asleep
+        {
+            public DateTime start;
+            public DateTime end;
+            public int minutes;
+        }
     }
 }

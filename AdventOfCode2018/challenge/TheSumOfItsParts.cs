@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AdventOfCode2018.challenge
 {
@@ -90,7 +88,7 @@ namespace AdventOfCode2018.challenge
                 seconds++;
             }
 
-            return 0;
+            return workers.OrderByDescending(w => w.sum).First().sum;
         }
 
         public static Dictionary<string, int> GetTimeLookupTable()
@@ -153,39 +151,39 @@ namespace AdventOfCode2018.challenge
 
             return list;
         }
-    }
 
-    class Worker
-    {
-        public List<Node> Schedule = new List<Node>();
-        public int sum = 0;
-    }
-
-    class Instruction
-    {
-        public string name;
-        public string before;
-
-        public static Instruction Parse(string line)
+        public class Worker
         {
-            string[] words = line.Split(' ');
-            return new Instruction()
-            {
-                name = words[1],
-                before = words[7]
-            };
+            public List<Node> Schedule = new List<Node>();
+            public int sum = 0;
         }
-    }
 
-    class Node
-    {
-        public string name;
-        public List<Node> ancestors;
-
-        public Node(string name)
+        public class Instruction
         {
-            this.ancestors = new List<Node>();
-            this.name = name;
+            public string name;
+            public string before;
+
+            public static Instruction Parse(string line)
+            {
+                string[] words = line.Split(' ');
+                return new Instruction()
+                {
+                    name = words[1],
+                    before = words[7]
+                };
+            }
+        }
+
+        public class Node
+        {
+            public string name;
+            public List<Node> ancestors;
+
+            public Node(string name)
+            {
+                this.ancestors = new List<Node>();
+                this.name = name;
+            }
         }
     }
 }

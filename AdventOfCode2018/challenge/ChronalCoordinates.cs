@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AdventOfCode2018.challenge
 {
@@ -52,98 +50,98 @@ namespace AdventOfCode2018.challenge
 
             return list;
         }
-    }
 
-    public class Point
-    {
-        public int x;
-        public int y;
-
-        public static Point Parse(string line)
+        public class Point
         {
-            var coordinates = line.Split(',');
-            return new Point()
+            public int x;
+            public int y;
+
+            public static Point Parse(string line)
             {
-                x = int.Parse(coordinates.First().Trim(new char[] { ' '})),
-                y = int.Parse(coordinates.Last().Trim(new char[] { ' ' }))
-            };
-        }
-    }
-
-    public class Map
-    {
-        private List<Point> points;
-        private Point[,] map;
-        private int[,] sumMap;
-
-        public void AddCoordinates(List<Point> points)
-        {
-            map = new Point[points.Max(p => p.x) + 1, points.Max(p => p.y) + 1];
-            sumMap = new int[points.Max(p => p.x) + 1, points.Max(p => p.y) + 1];
-
-            this.points = points;
-            foreach (Point point in points)
-            {
-                map[point.x, point.y] = point;
+                var coordinates = line.Split(',');
+                return new Point()
+                {
+                    x = int.Parse(coordinates.First().Trim(new char[] { ' ' })),
+                    y = int.Parse(coordinates.Last().Trim(new char[] { ' ' }))
+                };
             }
         }
 
-        public void FillMap()
+        public class Map
         {
-            for (int i = 0; i < map.GetLength(0); i++)
+            private List<Point> points;
+            private Point[,] map;
+            private int[,] sumMap;
+
+            public void AddCoordinates(List<Point> points)
             {
-                for (int j = 0; j < map.GetLength(1); j++)
+                map = new Point[points.Max(p => p.x) + 1, points.Max(p => p.y) + 1];
+                sumMap = new int[points.Max(p => p.x) + 1, points.Max(p => p.y) + 1];
+
+                this.points = points;
+                foreach (Point point in points)
                 {
-                    Dictionary<Point, double> distances = new Dictionary<Point, double>();
-                    foreach (Point point in this.points)
-                    {
-                        distances.Add(point, Math.Abs(i - point.x) + Math.Abs(j - point.y));
-                    }
-
-                    map[i, j] = distances.OrderByDescending(d => d.Value).Last().Key;
-                    sumMap[i, j] = distances.Sum(d => (int)(d.Value));
-                }
-            }
-        }
-
-        public int GetLargestAreaSize()
-        {
-            List<Point> excludes = new List<Point>();
-            Dictionary<Point, int> regions = new Dictionary<Point, int>();
-            for (int i = 0; i < map.GetLength(0); i++)
-            {
-                for (int j = 0; j < map.GetLength(1); j++)
-                {
-                    if (i <= points.Min(p => p.x) - 1 || i >= points.Max(p => p.x) - 1) excludes.Add(map[i, j]);
-                    if (j <= points.Min(p => p.y) - 1 || j >= points.Max(p => p.y) - 1) excludes.Add(map[i, j]);
-
-                    if (regions.ContainsKey(map[i, j]))
-                    {
-                        regions[map[i, j]]++;
-                    }
-                    else regions.Add(map[i, j], 1);
+                    map[point.x, point.y] = point;
                 }
             }
 
-            excludes = excludes.Distinct().ToList();
-            return regions.Where(r => !excludes.Contains(r.Key)).Max(r => r.Value);
-        }
-
-        public int GetRegionWithLessThan10000Distance()
-        {
-            int amount = 0;
-            for (int i = 0; i < map.GetLength(0); i++)
+            public void FillMap()
             {
-                for (int j = 0; j < map.GetLength(1); j++)
+                for (int i = 0; i < map.GetLength(0); i++)
                 {
-                    if (sumMap[i, j] < 10000)
+                    for (int j = 0; j < map.GetLength(1); j++)
                     {
-                        amount++;
+                        Dictionary<Point, double> distances = new Dictionary<Point, double>();
+                        foreach (Point point in this.points)
+                        {
+                            distances.Add(point, Math.Abs(i - point.x) + Math.Abs(j - point.y));
+                        }
+
+                        map[i, j] = distances.OrderByDescending(d => d.Value).Last().Key;
+                        sumMap[i, j] = distances.Sum(d => (int)(d.Value));
                     }
                 }
             }
 
-            return amount;
+            public int GetLargestAreaSize()
+            {
+                List<Point> excludes = new List<Point>();
+                Dictionary<Point, int> regions = new Dictionary<Point, int>();
+                for (int i = 0; i < map.GetLength(0); i++)
+                {
+                    for (int j = 0; j < map.GetLength(1); j++)
+                    {
+                        if (i <= points.Min(p => p.x) - 1 || i >= points.Max(p => p.x) - 1) excludes.Add(map[i, j]);
+                        if (j <= points.Min(p => p.y) - 1 || j >= points.Max(p => p.y) - 1) excludes.Add(map[i, j]);
+
+                        if (regions.ContainsKey(map[i, j]))
+                        {
+                            regions[map[i, j]]++;
+                        }
+                        else regions.Add(map[i, j], 1);
+                    }
+                }
+
+                excludes = excludes.Distinct().ToList();
+                return regions.Where(r => !excludes.Contains(r.Key)).Max(r => r.Value);
+            }
+
+            public int GetRegionWithLessThan10000Distance()
+            {
+                int amount = 0;
+                for (int i = 0; i < map.GetLength(0); i++)
+                {
+                    for (int j = 0; j < map.GetLength(1); j++)
+                    {
+                        if (sumMap[i, j] < 10000)
+                        {
+                            amount++;
+                        }
+                    }
+                }
+
+                return amount;
+            }
         }
     }
 }
