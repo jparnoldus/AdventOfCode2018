@@ -8,7 +8,7 @@ namespace AdventOfCode2018
 
         static void Main(string[] args)
         {
-            var answer = MarbleMania.PlayGame(100);
+            var answer = TheStarsAlign.AlignStars(50);
         }
     }
 }
