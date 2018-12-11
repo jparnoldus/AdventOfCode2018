@@ -8,7 +8,7 @@ namespace AdventOfCode2018
 
         static void Main(string[] args)
         {
-            var answer = TheStarsAlign.AlignStars(50);
+            var answer = ChronalCharge.GetAnswer2();
         }
     }
 }
