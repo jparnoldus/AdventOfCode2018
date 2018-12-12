@@ -8,7 +8,7 @@ namespace AdventOfCode2018
 
         static void Main(string[] args)
         {
-            var answer = ChronalCharge.GetAnswer2();
+            var answer = SubterraneanSustainability.GetPlantPopulation(50000);
         }
     }
 }
