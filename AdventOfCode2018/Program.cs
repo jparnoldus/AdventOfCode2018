@@ -8,7 +8,8 @@ namespace AdventOfCode2018
 
         static void Main(string[] args)
         {
-            var answer = MineCartMadness.GetLastCartLocation();
+            string input = "554401";
+            var answer = ChocolateCharts.GetLeftOf(input);
         }
     }
 }
