@@ -8,8 +8,7 @@ namespace AdventOfCode2018
 
         static void Main(string[] args)
         {
-            string input = "554401";
-            var answer = ChocolateCharts.GetLeftOf(input);
+            var answer = ChronalClassification.GetProgramOutcome();
         }
     }
 }
