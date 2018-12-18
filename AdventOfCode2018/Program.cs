@@ -8,7 +8,7 @@ namespace AdventOfCode2018
 
         static void Main(string[] args)
         {
-            var answer = ChronalClassification.GetProgramOutcome();
+            var answer = SettlersOfTheNorthPole.GetResourceValue(10);
         }
     }
 }

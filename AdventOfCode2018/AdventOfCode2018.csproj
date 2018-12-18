@@ -58,6 +58,7 @@
     <Compile Include="challenge\MemoryManeuver.cs" />
     <Compile Include="challenge\NoMatterHowYouSliceIt.cs" />
     <Compile Include="challenge\ReposeRecord.cs" />
+    <Compile Include="challenge\SettlersOfTheNorthPole.cs" />
     <Compile Include="challenge\SubterraneanSustainability.cs" />
     <Compile Include="challenge\TheStarsAlign.cs" />
     <Compile Include="challenge\TheSumOfItsParts.cs" />
@@ -89,6 +90,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="input\day16.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="input\day18.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="input\day2.txt">
