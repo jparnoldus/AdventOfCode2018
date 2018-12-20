@@ -53,6 +53,7 @@
     <Compile Include="challenge\ChronalCharge.cs" />
     <Compile Include="challenge\ChronalClassification.cs" />
     <Compile Include="challenge\ChronalCoordinates.cs" />
+    <Compile Include="challenge\GoWithTheFlow.cs" />
     <Compile Include="challenge\InventoryManagementSystem.cs" />
     <Compile Include="challenge\MarbleMania.cs" />
     <Compile Include="challenge\MemoryManeuver.cs" />
@@ -97,6 +98,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="input\day18.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="input\day19.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="input\day2.txt">
