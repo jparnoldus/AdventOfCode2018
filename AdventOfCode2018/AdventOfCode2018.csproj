@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="challenge\ARegularMap.cs" />
     <Compile Include="challenge\BeverageBandits.cs" />
     <Compile Include="challenge\Challenge.cs" />
     <Compile Include="challenge\ChocolateCharts.cs" />
@@ -52,11 +53,16 @@
     <Compile Include="challenge\AlchemicalReduction.cs" />
     <Compile Include="challenge\ChronalCharge.cs" />
     <Compile Include="challenge\ChronalClassification.cs" />
+    <Compile Include="challenge\ChronalConversion.cs" />
     <Compile Include="challenge\ChronalCoordinates.cs" />
+    <Compile Include="challenge\ExperimentalEmergencyTeleportation.cs" />
+    <Compile Include="challenge\Four-DimensionalAdventure.cs" />
     <Compile Include="challenge\GoWithTheFlow.cs" />
+    <Compile Include="challenge\ImmuneSystemSimulator.cs" />
     <Compile Include="challenge\InventoryManagementSystem.cs" />
     <Compile Include="challenge\MarbleMania.cs" />
     <Compile Include="challenge\MemoryManeuver.cs" />
+    <Compile Include="challenge\ModeMaze.cs" />
     <Compile Include="challenge\NoMatterHowYouSliceIt.cs" />
     <Compile Include="challenge\ReposeRecord.cs" />
     <Compile Include="challenge\ReservoirResearch.cs" />
@@ -104,6 +110,21 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="input\day2.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="input\day20.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="input\day21.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="input\day23.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="input\day24.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="input\day25.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="input\day3.txt">

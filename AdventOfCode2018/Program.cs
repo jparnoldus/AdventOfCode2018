@@ -8,7 +8,7 @@ namespace AdventOfCode2018
 
         static void Main(string[] args)
         {
-            ReservoirResearch.Do();
+            var answer = ModeMaze.GetTraversalTime();
         }
     }
 }

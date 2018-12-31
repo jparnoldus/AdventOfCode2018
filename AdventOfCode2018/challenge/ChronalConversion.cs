@@ -5,56 +5,53 @@ using System.Linq;
 
 namespace AdventOfCode2018.challenge
 {
-    class GoWithTheFlow : Challenge
+    class ChronalConversion : Challenge
     {
-        public static int[] GetOutcome()
+        public static int GetLowerBound()
         {
-            int[] registers = new int[6];
-            (int ip, Instruction[] instructions) program = GetProgram();
-            
-            while (registers[program.ip] < program.instructions.Length)
+            while (true)
             {
-                registers = ExecuteInstruction(program.instructions[registers[program.ip]], registers);
-                registers[program.ip]++;
-            }
+                int[] registers = new int[6];
+                (int ip, Instruction[] instructions) program = GetProgram();
+                
+                while (registers[program.ip] < program.instructions.Length)
+                {
+                    registers = ExecuteInstruction(program.instructions[registers[program.ip]], registers);
 
-            return registers;
+                    //Code comparers register 4 to register 0
+                    if (registers[program.ip] == 28)
+                        return registers[4];
+
+                    registers[program.ip]++;
+                }
+            }
         }
 
-        public static int GetPartTwo()
+        public static int GetUpperBound()
         {
-            int[] registers = new int[6];
-            registers[0] = 1;
-            (int ip, Instruction[] instructions) program = GetProgram();
-
-            while (registers[program.ip] < program.instructions.Length)
+            while (true)
             {
-                registers = ExecuteInstruction(program.instructions[registers[program.ip]], registers);
-
-                // I had to cheat a little and look on reddit for this one.
-                // Even then it took a while before I understood where to add code and what code.
-                // Also had to change the code so it would actually work with my solution.
-                // I tried disassembling the code myself and got pretty far,
-                // but it's just not something I have experience with at all and it left me confused.
-
-                if (registers[program.ip] == 2 && registers[3] != 0)
+                int[] registers = new int[6];
+                (int ip, Instruction[] instructions) program = GetProgram();
+                List<int> list = new List<int>();
+                int answer = 0;
+                
+                while (registers[program.ip] < program.instructions.Length)
                 {
-                    if (registers[5] % registers[3] == 0)
+                    registers = ExecuteInstruction(program.instructions[registers[program.ip]], registers);
+
+                    //Code comparers register 4 to register 0
+                    if (registers[program.ip] == 28)
                     {
-                        registers[0] += registers[3];
+                        if (list.Contains(registers[4]))
+                            return answer;
+                        list.Add(registers[4]);
+                        answer = registers[4];
                     }
 
-                    registers[2] = 0;
-                    registers[1] = registers[5];
-                    registers[program.ip] = 12;
-
-                    continue;
+                    registers[program.ip]++;
                 }
-
-                registers[program.ip]++;
             }
-
-            return registers[0];
         }
 
         private static (int, Instruction[]) GetProgram()
@@ -64,7 +61,7 @@ namespace AdventOfCode2018.challenge
 
             try
             {
-                using (StreamReader sr = new StreamReader(GetPath(19)))
+                using (StreamReader sr = new StreamReader(GetPath(21)))
                 {
                     position = int.Parse(sr.ReadLine().Last().ToString());
 
